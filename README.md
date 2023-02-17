@@ -22,6 +22,11 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 ## Progress monitor:
 
 ```
+import time
+
+from celery import shared_task
+from django_celery_progress.progress import set_progress
+
 @shared_task(bind=True, name='my_task')
 def my_task(self):
     for i in range(100):
