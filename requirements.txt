@@ -1,5 +1,5 @@
 build==0.9.0
 celery==5.2.7
-Django==3.2.18
+Django>=2.2.7
 twine==4.0.2
 redis==4.5.1
