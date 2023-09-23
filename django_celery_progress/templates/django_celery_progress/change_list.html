@@ -1,0 +1,43 @@
+<!-- prettier-ignore -->
+{% extends "admin/change_list.html" %}
+{% block content %}
+{{ block.super }}
+
+<script>
+  var table = document.getElementById("result_list");
+  if (table) {
+    var rows = table.getElementsByTagName("tr");
+    var filteredRows = Array.from(rows).filter(function (row) {
+      var cell = row.querySelector(".field-current");
+      return cell && Number.isInteger(parseInt(cell.textContent.trim()));
+    });
+    filteredRows.forEach(function (row) {
+      var idCell = row.querySelector(".field-id");
+      var statusCell = row.querySelector(".field-status");
+      var currentCell = row.querySelector(".field-current");
+      var totalCell = row.querySelector(".field-total");
+      var resultCell = row.querySelector(".field-result");
+      var exceptionCell = row.querySelector(".field-exception");
+      var dateCompletedCell = row.querySelector(".field-date_completed");
+      var id = idCell.textContent.trim();
+      var timeout = setInterval(async function () {
+        var res = await fetch(id + "/progress/");
+        if (res.ok) {
+          var data = await res.json();
+          if (statusCell) statusCell.textContent = data.status;
+          if (currentCell) currentCell.textContent = data.current;
+          if (totalCell) totalCell.textContent = data.total;
+          if (resultCell) resultCell.textContent = data.result;
+          if (exceptionCell) exceptionCell.textContent = data.exception;
+          if (dateCompletedCell)
+            dateCompletedCell.textContent = data.date_completed;
+          if (data.current === "-") {
+            clearInterval(timeout);
+          }
+        }
+      }, 1000);
+    });
+  }
+</script>
+
+{% endblock content %}
