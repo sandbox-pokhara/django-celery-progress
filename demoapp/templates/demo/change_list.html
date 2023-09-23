@@ -1,0 +1,11 @@
+<!-- prettier-ignore -->
+{% extends "django_celery_progress/change_list.html" %}
+{% block object-tools-items %}
+{% for button in extra_buttons %}
+<li>
+  <a href="{{ button.url }}"> {{ button.title }} </a>
+</li>
+<!-- prettier-ignore -->
+{% endfor %}
+{{ block.super }}
+{% endblock %}

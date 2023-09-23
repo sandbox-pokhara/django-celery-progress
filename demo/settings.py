@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "demoapp",
     "django_celery_progress",
     "django.contrib.admin",
     "django.contrib.auth",
