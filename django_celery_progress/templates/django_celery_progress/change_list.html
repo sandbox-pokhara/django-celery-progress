@@ -8,8 +8,8 @@
   if (table) {
     var rows = table.getElementsByTagName("tr");
     var filteredRows = Array.from(rows).filter(function (row) {
-      var cell = row.querySelector(".field-current");
-      return cell && Number.isInteger(parseInt(cell.textContent.trim()));
+      var cell = row.querySelector(".field-status");
+      return cell && cell.textContent.trim() === "RUNNING";
     });
     filteredRows.forEach(function (row) {
       var idCell = row.querySelector(".field-id");
@@ -20,7 +20,8 @@
       var exceptionCell = row.querySelector(".field-exception");
       var dateCompletedCell = row.querySelector(".field-date_completed");
       var id = idCell.textContent.trim();
-      var timeout = setInterval(async function () {
+
+      async function updateRow() {
         var res = await fetch(id + "/progress/");
         if (res.ok) {
           var data = await res.json();
@@ -31,11 +32,12 @@
           if (exceptionCell) exceptionCell.textContent = data.exception;
           if (dateCompletedCell)
             dateCompletedCell.textContent = data.date_completed;
-          if (data.current === "-") {
-            clearInterval(timeout);
+          if (data.status === "RUNNING") {
+            setTimeout(updateRow, 5000);
           }
         }
-      }, 1000);
+      }
+      setTimeout(updateRow, 5000);
     });
   }
 </script>

@@ -66,3 +66,4 @@ def my_task(self):
     for i in range(100):
         time.sleep(1)
         set_progress(self, i + 1, 100)
+    return "Task completed successfully."
