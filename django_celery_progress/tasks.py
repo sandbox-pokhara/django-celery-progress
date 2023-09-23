@@ -17,9 +17,9 @@ from .progress import set_progress
 def task_received_handler(request, **kwargs):
     del kwargs
     info = request.info()
-    task, _ = Task.objects.get_or_create(uuid=info['id'])
-    task.status = 'RECEIVED'
-    task.name = info['name']
+    task, _ = Task.objects.get_or_create(uuid=info["id"])
+    task.status = "RECEIVED"
+    task.name = info["name"]
     task.save()
 
 
@@ -27,7 +27,7 @@ def task_received_handler(request, **kwargs):
 def task_prerun_handler(task_id, **kwargs):
     del kwargs
     task, _ = Task.objects.get_or_create(uuid=task_id)
-    task.status = 'RUNNING'
+    task.status = "RUNNING"
     task.save()
 
 
@@ -46,20 +46,22 @@ def task_failure_handler(task_id, exception, traceback, **kwargs):
     del kwargs
     task, _ = Task.objects.get_or_create(uuid=task_id)
     task.exception = exception.__class__.__name__
-    task.traceback = ''.join(tb.format_tb(traceback))
+    task.traceback = "".join(tb.format_tb(traceback))
     task.save()
 
 
-@shared_task(name='remove-old-tasks')
+@shared_task(name="remove-old-tasks")
 def remove_old_tasks():
-    if not hasattr(settings, 'CELERY_MAX_TASKS'):
-        return 'CELERY_MAX_TASKS is not set.'
-    to_remove = Task.objects.order_by('-id')[settings.CELERY_MAX_TASKS:]
-    count, _ = Task.objects.filter(pk__in=to_remove.values_list('pk', flat=True)).delete()
-    return f'{count} task(s) removed.'
+    if not hasattr(settings, "CELERY_MAX_TASKS"):
+        return "CELERY_MAX_TASKS is not set."
+    to_remove = Task.objects.order_by("-id")[settings.CELERY_MAX_TASKS :]
+    count, _ = Task.objects.filter(
+        pk__in=to_remove.values_list("pk", flat=True)
+    ).delete()
+    return f"{count} task(s) removed."
 
 
-@shared_task(bind=True, name='my_task')
+@shared_task(bind=True, name="my_task")
 def my_task(self):
     for i in range(100):
         time.sleep(1)
