@@ -63,7 +63,7 @@ def remove_old_tasks():
 
 @shared_task(bind=True, name="my_task")
 def my_task(self):
-    for i in range(100):
+    for i in range(15):
         time.sleep(1)
-        set_progress(self, i + 1, 100)
+        set_progress(self, i + 1, 15)
     return "Task completed successfully."
