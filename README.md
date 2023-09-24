@@ -1,4 +1,4 @@
-# Django Celery Monitor
+# Django Celery Progress
 
 A django app to monitor celery tasks with progress
 
@@ -36,4 +36,4 @@ def my_task(self):
 
 ## Screenshot
 
-![Screenshot](https://raw.githubusercontent.com/sandbox-pokhara/django-celery-progress/master/images/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/sandbox-pokhara/django-celery-progress/master/images/screenshot.gif)
