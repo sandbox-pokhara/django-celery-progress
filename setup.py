@@ -11,10 +11,10 @@ setuptools.setup(
     description="A django app to monitor celery tasks with progress",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pradishb/django-celery-progress",
+    url="https://github.com/sandbox-pokhara/django-celery-progress",
     project_urls={
         "Bug Tracker": (
-            "https://github.com/pradishb/django-celery-progress/issues"
+            "https://github.com/sandbox-pokhara/django-celery-progress/issues"
         ),
     },
     classifiers=[

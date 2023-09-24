@@ -2,6 +2,10 @@
 
 A django app to monitor celery tasks with progress
 
+## Demo
+
+![Demo](https://raw.githubusercontent.com/sandbox-pokhara/django-celery-progress/master/images/screenshot.gif)
+
 ## Quick start
 
 Add "django_celery_progress" to your INSTALLED_APPS:
@@ -33,7 +37,3 @@ def my_task(self):
         time.sleep(1)
         set_progress(self, i + 1, 100)
 ```
-
-## Screenshot
-
-![Screenshot](https://raw.githubusercontent.com/sandbox-pokhara/django-celery-progress/master/images/screenshot.gif)
