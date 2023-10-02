@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="django-celery-progress",
-    version="1.0.4",
+    version="1.0.5",
     author="Pradish Bijukchhe",
     author_email="pradishbijukchhe@gmail.com",
     description="A django app to monitor celery tasks with progress",
