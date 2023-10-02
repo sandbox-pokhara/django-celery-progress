@@ -20,8 +20,8 @@ class TaskAdmin(admin.ModelAdmin):
         "total",
         "result",
         "exception",
-        "date_created",
-        "date_completed",
+        "date_created_natural",
+        "date_completed_natural",
     ]
 
     list_filter = [
@@ -46,6 +46,18 @@ class TaskAdmin(admin.ModelAdmin):
 
     def total(self, obj):
         return get_job_info(obj, "total")
+
+    def date_created_natural(self, obj):
+        return naturaltime(obj.date_created)
+
+    def date_completed_natural(self, obj):
+        return naturaltime(obj.date_completed)
+
+    date_created_natural.short_description = "Date Created"
+    date_completed_natural.short_description = "Date Completed"
+
+    date_created_natural.admin_order_field = "date_created"
+    date_completed_natural.admin_order_field = "date_completed"
 
     def has_add_permission(self, *args, **kwargs):
         return False

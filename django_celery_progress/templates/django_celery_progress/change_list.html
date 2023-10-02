@@ -18,7 +18,10 @@
       var totalCell = row.querySelector(".field-total");
       var resultCell = row.querySelector(".field-result");
       var exceptionCell = row.querySelector(".field-exception");
-      var dateCompletedCell = row.querySelector(".field-date_completed");
+      var dateCompletedCell = row.querySelector(
+        ".field-date_completed_natural"
+      );
+      var dateCcreatedCell = row.querySelector(".field-date_created_natural");
       var id = idCell.textContent.trim();
 
       async function updateRow() {
@@ -32,6 +35,8 @@
           if (exceptionCell) exceptionCell.textContent = data.exception;
           if (dateCompletedCell)
             dateCompletedCell.textContent = data.date_completed;
+          if (dateCcreatedCell)
+            dateCcreatedCell.textContent = data.date_created;
           if (data.status === "RUNNING") {
             setTimeout(updateRow, 5000);
           }
